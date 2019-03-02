@@ -1,15 +1,20 @@
 import React from 'react';
-import {Text, View } from 'react-native';
-import styles from './styles';
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware} from "redux";
+import thunkMiddleware from 'redux-thunk';
+import contactReducer from "./src/store/reducers/contactReducer";
+import Contacts from "./src/containers/Contacts/Contacts";
+
+const store = createStore(contactReducer, applyMiddleware(thunkMiddleware));
 
 export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
-    );
-  }
+    render() {
+        return (
+            <Provider store={store}>
+                <Contacts/>
+            </Provider>
+        );
+    }
 }
 
 
