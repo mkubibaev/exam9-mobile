@@ -1,4 +1,8 @@
-import {FETCH_CONTACTS_SUCCESS, FETCH_DATA_FAILURE, FETCH_DATA_REQUEST} from "./actionTypes";
+import {
+    FETCH_CONTACTS_SUCCESS,
+    FETCH_DATA_FAILURE,
+    FETCH_DATA_REQUEST, SELECT_CONTACT
+} from "./actionTypes";
 import axios from '../../axios-contacts';
 
 
@@ -18,3 +22,5 @@ export const fetchContacts = () => {
         });
     }
 };
+
+export const selectContact = id => ({type: SELECT_CONTACT, id});

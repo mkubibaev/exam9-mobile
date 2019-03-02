@@ -20,5 +20,22 @@ export default styles = StyleSheet.create({
     },
     contactName: {
         fontSize: 20
+    },
+    modal: {
+        flex: 1,
+        paddingTop: 30,
+        justifyContent: 'space-between',
+    },
+    modalContact: {
+        alignItems: 'center'
+    },
+    modalImg: {
+        width: 200,
+        height: 200,
+        marginBottom: 10,
+    },
+    modalContactText: {
+        fontSize: 20,
+        marginBottom: 5
     }
 });

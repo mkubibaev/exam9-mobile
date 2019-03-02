@@ -1,7 +1,12 @@
-import {FETCH_CONTACTS_SUCCESS, FETCH_DATA_FAILURE, FETCH_DATA_REQUEST} from "../actions/actionTypes";
+import {
+    FETCH_CONTACTS_SUCCESS,
+    FETCH_DATA_FAILURE,
+    FETCH_DATA_REQUEST, SELECT_CONTACT,
+} from "../actions/actionTypes";
 
 const initialState = {
     contacts: {},
+    selectedContactId: null,
     error: null,
     loading: true
 };
@@ -26,6 +31,12 @@ const contactReducer = (state = initialState, action) => {
                 ...state,
                 error: action.error,
                 loading: false,
+            };
+
+        case SELECT_CONTACT:
+            return {
+                ...state,
+                selectedContactId: action.id,
             };
 
         default:

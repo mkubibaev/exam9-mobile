@@ -3,9 +3,23 @@ import {connect} from "react-redux";
 import {View, FlatList, TouchableOpacity, Image, Text} from 'react-native';
 import {fetchContacts} from "../../store/actions/contactActions";
 import styles from "../../../styles";
+import ContactInfo from "../../components/ContactInfo/ContactInfo";
 
 
 class Contacts extends Component {
+
+    state = {
+        showModal: false,
+        id: ''
+    };
+
+    toggleModal = (id) => {
+        this.setState({
+            showModal: !this.state.showModal,
+            id
+        });
+
+    };
 
     componentDidMount() {
         this.props.fetchContacts()
@@ -20,11 +34,17 @@ class Contacts extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <ContactInfo
+                    show={this.state.showModal}
+                    contact={this.props.contacts[this.state.id]}
+                    close={this.toggleModal}
+                />
+
                 <FlatList
                     data={this.convertToArr(this.props.contacts)}
                     keyExtractor={item => item.id}
                     renderItem={({item}) => (
-                        <TouchableOpacity style={styles.contact}>
+                        <TouchableOpacity style={styles.contact} onPress={() => this.toggleModal(item.id)}>
 
                             <Image style={styles.contactImg} source={{uri: item.photo}}/>
                             <Text style={styles.contactName}>{item.name}</Text>
@@ -44,7 +64,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    fetchContacts: () => dispatch(fetchContacts())
+    fetchContacts: () => dispatch(fetchContacts()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Contacts);
